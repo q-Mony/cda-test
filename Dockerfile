@@ -4,9 +4,9 @@ WORKDIR /opt/
 
 COPY ./ /opt/
 
-RUN npm config set registry RUN yarn config set registry http://192.168.100.223:11180/repository/group-npm/
+RUN npm config set registry RUN npm config set registry http://192.168.100.223:11180/repository/group-npm/
 
-RUN npm install
+RUN npm install --verbose
 
 RUN npm build
 
