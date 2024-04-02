@@ -28,4 +28,4 @@ ENV HTTP_URL http://192.168.100.223:8080/
 
 
 
-CMD ["npm", "run start"]
+CMD ["/bin/sh", "npm run start"]
