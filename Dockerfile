@@ -9,7 +9,7 @@ COPY package.json package-lock.json ./
 # 非打包机打包的话注释下面这句话
 RUN npm config set registry http://192.168.100.223:11180/repository/group-npm/
 # Install dependencies
-RUN npm ci
+RUN npm install --verbose
 
 # Copy the rest of the application code
 COPY . .
