@@ -7,7 +7,7 @@ WORKDIR /opt/
 COPY package.json package-lock.json /opt/
 
 #非打包机打包的话注释下面这句话
-RUN npm config set registry http://192.168.31.52:11180/repository/group-npm/
+RUN npm config set registry http://192.168.100.223:11180/repository/group-npm/
 # Install dependencies only if lock file changes
 RUN npm install --verbose
 
