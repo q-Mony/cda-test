@@ -33,6 +33,6 @@ COPY --from=build /opt/build /opt/serve
 WORKDIR /opt/serve
 
 # Expose port 5000 (default port for serve)
-EXPOSE 3000
+EXPOSE 3000 8989
 # Start serve to serve the application
 CMD ["serve", "-s", "."]
