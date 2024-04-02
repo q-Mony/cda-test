@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 //components
 import UserInfo from "../../components/userinfo"
 import UseAPI from '../../components/useapi'
@@ -8,10 +8,6 @@ import './index.css'
 export default function Main() {
     const location = useLocation();
     const userInfo = location.state.userInfo;
-    if (!userInfo) {
-        userInfo = {} 
-    }
-
     return (
         <div className="main">
             <UserInfo userInfo={userInfo} />
