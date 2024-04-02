@@ -33,7 +33,8 @@ COPY --from=build /opt/build /opt/serve
 WORKDIR /opt/serve
 
 # Expose port 5000 (default port for serve)
-EXPOSE 5000
+EXPOSE 3000
+ENV HTTP_URL="http://192.168.31.210:8080"
 
 # Start serve to serve the application
 CMD ["serve", "-s", "."]
