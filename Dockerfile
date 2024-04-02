@@ -34,7 +34,9 @@ WORKDIR /opt/serve
 
 # Expose port 5000 (default port for serve)
 EXPOSE 3000
-ENV HTTP_URL="http://192.168.31.210:8080"
+# 设置默认值为 http://127.0.0.1:8080
+ARG HTTP_URL=http://192.168.31.210:8080
+ENV HTTP_URL $HTTP_URL
 
 # Start serve to serve the application
 CMD ["serve", "-s", "."]
