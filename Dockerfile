@@ -36,4 +36,4 @@ COPY --from=build /opt/app/server /opt/app/server
 EXPOSE 8989
 
 # Start the server
-CMD ["node", "server/server.js"]
+CMD ["node", "./server/server.js"]
