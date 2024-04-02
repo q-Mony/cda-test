@@ -8,7 +8,7 @@ RUN npm config set registry RUN npm config set registry http://192.168.100.223:1
 
 RUN npm install --verbose
 
-RUN npm build
+RUN npm run build
 
 FROM nginx:1.20.2-alpine
 ENV NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx/
