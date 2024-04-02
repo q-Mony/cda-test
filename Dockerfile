@@ -23,15 +23,14 @@ FROM node:20-alpine as serve
 # Install serve globally
 RUN npm install -g serve
 
+# Set the working directory to /opt/app
+WORKDIR /opt/app
+
 # Copy the built application from the build stage
 COPY --from=build /opt/app/build /opt/app/build
 
-# Set the working directory to the build directory
-WORKDIR /opt/app/build
+# Expose port 8989
+EXPOSE 8989
 
-# Expose port 3000 (default port for serve)
-EXPOSE 3000
-ENV PORT=3000
-
-# Serve the application
-CMD ["serve", "-s", "."]
+# Start the server
+CMD ["node", "./server/server.js"]

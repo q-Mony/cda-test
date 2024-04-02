@@ -5,9 +5,13 @@ const CryptoJS = require('crypto-js')
 const session = require('koa-session');
 const serverConfig = require('./server_config')
 const serverUtil = require('./server_util')
+const serve = require('koa-static');
+const path = require('path');
+const send = require('koa-send');
 
 const LJ_JSTICKET_KEY = 'lk_jsticket'
 const LJ_TOKEN_KEY = 'lk_token'
+
 
 //处理免登请求，返回用户的user_access_token
 async function getUserAccessToken(ctx) {
@@ -177,13 +181,24 @@ const koaSessionConfig = {
     renew: false, /** (boolean) renew session when session is nearly expired      【需要修改】*/
 };
 app.use(session(koaSessionConfig, app));
+// 让 Node 为我们创建的 React 应用提供文件
+app.use(serve(path.resolve(__dirname, '../build')));
+// 所有之前未被处理的 GET 请求将返回我们的 React app
 
+router.get('/api', async (ctx) => {
+    ctx.body = 'Hello World';
+});
 
 //注册服务端路由和处理
 router.get(serverConfig.config.getUserAccessTokenPath, getUserAccessToken)
 router.get(serverConfig.config.getSignParametersPath, getSignParameters)
+
 var port = process.env.PORT || serverConfig.config.apiPort;
 app.use(router.routes()).use(router.allowedMethods());
+// 处理未被其他路由处理的 GET 请求，返回 React app
+app.use(async (ctx) => {
+    await send(ctx, 'index.html', { root: path.resolve(__dirname, '../build') });
+  });  
 app.listen(port, () => {
     console.log(`server is start, listening on port ${port}`);
 })
