@@ -32,7 +32,8 @@ COPY --from=build /opt/build /opt/serve
 # Set the working directory to the serve directory
 WORKDIR /opt/serve
 
-# Expose port 5000 (default port for serve)
-EXPOSE 3000 8989
-# Start serve to serve the application
-CMD ["serve", "-s", "."]
+# Expose port 3000 (default port for serve)
+EXPOSE 3000
+
+# 启动后端服务和前端服务
+CMD ["sh", "-c", "serve -s . & node /opt/server/server.js"]
