@@ -25,9 +25,7 @@ FROM nginx:1.25.2-alpine-slim
 
 ENV NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx/
 ENV HTTP_URL http://192.168.100.223:8080/
-# Copy built artifacts from the build stage
-COPY --from=build /opt/dist /usr/share/nginx/html/
-COPY --from=build /opt/default.conf /etc/nginx/conf.d/
 
 
-#CMD ["/bin/sh","-c", "nginx -g 'daemon off;'"]
+
+CMD ["npm run start"]
