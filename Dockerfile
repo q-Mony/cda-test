@@ -29,6 +29,9 @@ WORKDIR /opt/app
 # Copy the built application from the build stage
 COPY --from=build /opt/app/build /opt/app/build
 
+# Copy the node_modules from build stage
+COPY --from=build /opt/app/node_modules /opt/app/node_modules
+
 # Copy the server folder
 COPY --from=build /opt/app/server /opt/app/server
 
@@ -36,4 +39,4 @@ COPY --from=build /opt/app/server /opt/app/server
 EXPOSE 8989
 
 # Start the server
-CMD ["node", "./server/server.js"]
+CMD ["node", "server/server.js"]
