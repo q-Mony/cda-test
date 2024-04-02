@@ -29,8 +29,11 @@ WORKDIR /opt/app
 # Copy the built application from the build stage
 COPY --from=build /opt/app/build /opt/app/build
 
+# Copy the server folder
+COPY --from=build /opt/app/server /opt/app/server
+
 # Expose port 8989
 EXPOSE 8989
 
 # Start the server
-CMD ["node", "./server/server.js"]
+CMD ["node", "server/server.js"]
