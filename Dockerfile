@@ -29,16 +29,14 @@ WORKDIR /opt/app
 # Copy the built application from the build stage
 COPY --from=build /opt/app/build /opt/app/build
 
-# Copy the node_modules from build stage
-# COPY --from=build /opt/app/node_modules /opt/app/node_modules
-
 # Copy the server folder
 COPY --from=build /opt/app/server /opt/app/server
-# 全局安装所需的 Node.js 包
-RUN npm install -g koa koa-router axios crypto-js koa-session koa-static koa-send --verbose
 
 # Expose port 8989
 EXPOSE 8989
+
+# Set PATH environment variable to include globally installed Node.js packages
+ENV PATH="/opt/app/node_modules/.bin:${PATH}"
 
 # Start the server
 CMD ["node", "server/server.js"]
