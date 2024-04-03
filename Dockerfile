@@ -40,5 +40,6 @@ RUN npm install -g koa koa-router axios crypto-js koa-session koa-static koa-sen
 ENV PATH="/opt/app/node_modules/.bin:${PATH}"
 RUN echo "PATH=$PATH"
 RUN npm list -g --depth=0
+CMD ["sh", "-c", "npm list -g --depth=0"]
 # Start the server
 # CMD ["node", "server/server.js"]
