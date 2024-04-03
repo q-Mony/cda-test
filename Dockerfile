@@ -13,6 +13,7 @@ RUN npm install --verbose
 
 # Copy the rest of the application code
 COPY . .
+RUN ls
 # Build the application
 RUN npm run build
 
@@ -31,8 +32,9 @@ COPY --from=build /opt/app/build /opt/app/build
 # Copy the server folder
 COPY --from=build /opt/app/server /opt/app/server
 
-COPY --from=build /opt/app/.env /opt/app/server/../.env
+COPY --from=build /opt/app/.env /opt/app/.env
 
+RUN ls
 # Expose port 8989
 EXPOSE 8989
 
