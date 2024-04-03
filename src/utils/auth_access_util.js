@@ -162,7 +162,7 @@ function getOrigin(apiPort) {
   // console.log('process.env', process.env)
   let hostname = window.location.hostname;
   const myEnvVar = process.env.NODE_ENV;
-
+  console.log("模式"+myEnvVar);
   // 判断环境变量的值
   if (myEnvVar === "production") {
     return `https://${hostname}`;
