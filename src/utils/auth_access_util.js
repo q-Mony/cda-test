@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import StaticUtils from "./Static_Util.js";
 
 const LJ_TOKEN_KEY = "lk_token";
-const isDebug = process.env.isDebug;
+const isDebug = process.env.REACT_APP_DEBUG;
 /// ---------------- JSAPI鉴权 部分 -------------------------
 
 export async function handleJSAPIAccess(complete) {
@@ -160,6 +160,7 @@ function requestUserAccessToken(code, complete) {
 
 function getOrigin(apiPort) {
   let hostname = window.location.hostname;
+
   console.log("模式"+isDebug);
   // 判断环境变量的值
   if (!isDebug) {

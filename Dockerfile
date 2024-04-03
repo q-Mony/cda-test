@@ -14,7 +14,7 @@ RUN npm install --verbose
 # Copy the rest of the application code
 COPY . .
 # Build the application
-RUN npm run build
+RUN npm run build 
 
 # Stage 2: Serve the application
 FROM node:20-alpine as serve
@@ -39,6 +39,8 @@ EXPOSE 8989
 RUN npm install -g koa koa-router axios crypto-js koa-session koa-static koa-send --verbose
 # Set PATH environment variable to include globally installed Node.js packages
 ENV NODE_PATH=/usr/local/lib/node_modules/
+ENV REACT_APP_DEBUG = true
+ENV REACT_APP_API_URL = http://192.168.100.55:32775
 
 # CMD ["sh", "-c", "npm list -g --depth=0 && node -v && node server/server.js"]
 # Start the server

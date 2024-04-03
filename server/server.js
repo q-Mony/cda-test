@@ -11,7 +11,7 @@ const send = require('koa-send');
 
 const LJ_JSTICKET_KEY = 'lk_jsticket'
 const LJ_TOKEN_KEY = 'lk_token'
-const isDebug = process.env.isDebug;
+const isDebug = process.env.REACT_APP_DEBUG;
 
 //处理免登请求，返回用户的user_access_token
 async function getUserAccessToken(ctx) {
