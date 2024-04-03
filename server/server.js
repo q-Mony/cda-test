@@ -12,6 +12,7 @@ const send = require('koa-send');
 const LJ_JSTICKET_KEY = 'lk_jsticket'
 const LJ_TOKEN_KEY = 'lk_token'
 const isDebug = process.env.REACT_APP_DEBUG;
+const isTest = process.env.REACT_APP_TEST;
 
 //处理免登请求，返回用户的user_access_token
 async function getUserAccessToken(ctx) {
@@ -185,7 +186,7 @@ app.use(session(koaSessionConfig, app));
 app.use(serve(path.resolve(__dirname, '../build')));
 // 所有之前未被处理的 GET 请求将返回我们的 React app
 router.get('/api', async (ctx) => {
-    ctx.body = 'Hello World'+isDebug;
+    ctx.body = isTest+'Hello World'+isDebug;
 });
 
 //注册服务端路由和处理
