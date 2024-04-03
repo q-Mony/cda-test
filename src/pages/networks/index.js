@@ -41,6 +41,10 @@ export default function Networks() {
   };
 
   const handleOk = () => {
+    if (inputValue.trim() === "") {
+      error("不能为空");
+      return;
+    }
     if (add) {
       handleAddNetwork();
     } else {
@@ -78,7 +82,7 @@ export default function Networks() {
   async function handleAddNetwork() {
     const data = {
       user_name: userName,
-      network: inputValue,
+      network: inputValue.trim(),
     };
     const response = await postData("/network/add", data);
     if (response && response.errorCode === 0) {
@@ -92,7 +96,7 @@ export default function Networks() {
   async function handleDelNetwork() {
     const data = {
       user_name: userName,
-      network: inputValue,
+      network: inputValue.trim(),
     };
     const response = await postData("/network/delete", data);
     if (response && response.errorCode === 0) {

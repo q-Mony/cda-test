@@ -41,6 +41,10 @@ export default function Organization() {
   };
 
   const handleOk = () => {
+    if (inputValue.trim() === "") {
+      error("不能为空");
+      return;
+    }
     if (add) {
       handleAddOrganization();
     } else {
@@ -78,7 +82,7 @@ export default function Organization() {
   async function handleAddOrganization() {
     const data = {
       user_name: userName,
-      org: inputValue,
+      org: inputValue.trim(),
     };
     const response = await postData("/org/add", data);
     if (response && response.errorCode === 0) {
@@ -92,7 +96,7 @@ export default function Organization() {
   async function handleDelOrganization() {
     const data = {
       user_name: userName,
-      org: inputValue,
+      org: inputValue.trim(),
     };
     const response = await postData("/org/delete", data);
     if (response && response.errorCode === 0) {
