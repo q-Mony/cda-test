@@ -13,7 +13,6 @@ RUN npm install --verbose
 
 # Copy the rest of the application code
 COPY . .
-RUN ls
 # Build the application
 RUN npm run build
 
@@ -34,7 +33,6 @@ COPY --from=build /opt/app/server /opt/app/server
 
 COPY --from=build /opt/app/.env /opt/app/.env
 
-RUN ls
 # Expose port 8989
 EXPOSE 8989
 
@@ -44,4 +42,4 @@ ENV NODE_PATH=/usr/local/lib/node_modules/
 
 # CMD ["sh", "-c", "npm list -g --depth=0 && node -v && node server/server.js"]
 # Start the server
-CMD ["node", "--env-file=.env server/server.js"]
+CMD ["node", "--env-file=.env","server/server.js"]
