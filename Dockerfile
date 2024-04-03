@@ -1,42 +1,25 @@
-# Stage 1: Build the application
-FROM node:20-alpine as build
+# 使用 Node.js 作为基础镜像
+FROM node:14-alpine
 
+# 设置工作目录
 WORKDIR /opt/app
 
-# Copy package.json and package-lock.json to install dependencies
-COPY package.json package-lock.json ./
-
-# 非打包机打包的话注释下面这句话
+# 安装项目依赖项
+COPY package*.json ./
 RUN npm config set registry http://192.168.100.223:11180/repository/group-npm/
-# Install dependencies
 RUN npm install --verbose
 
-# Copy the rest of the application code
+# 将整个项目目录复制到工作目录
 COPY . .
 
-# Build the application
-RUN npm run build
+# 将 server 目录拷贝到与 build 目录同一级别
+COPY server /opt/app/server
 
-# Stage 2: Serve the application
-FROM node:20-alpine as serve
+# 全局安装所需的 Node.js 包
+RUN npm install -g koa koa-router axios crypto-js koa-session koa-static koa-send --verbose
 
-# Install serve globally
-RUN npm install -g serve
-
-# Set the working directory to /opt/app
-WORKDIR /opt/app
-
-# Copy the built application from the build stage
-COPY --from=build /opt/app/build /opt/app/build
-
-# Copy the node_modules from build stage
-COPY --from=build /opt/app/node_modules /opt/app/node_modules
-
-# Copy the server folder
-COPY --from=build /opt/app/server /opt/app/server
-
-# Expose port 8989
+# 暴露端口（根据您的实际情况更改端口号）
 EXPOSE 8989
 
-# Start the server
+# 定义启动命令
 CMD ["node", "server/server.js"]
