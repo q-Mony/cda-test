@@ -165,7 +165,8 @@ function getOrigin(apiPort) {
 
   // 判断环境变量的值
   if (myEnvVar === "production") {
-    return `https://${hostname}`;
+    // return `https://${hostname}`;
+    return `http://${hostname}:${apiPort}`;
   }
   return `http://${hostname}:${apiPort}`;
 }
