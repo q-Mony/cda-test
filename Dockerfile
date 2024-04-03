@@ -13,9 +13,6 @@ RUN npm install --verbose
 
 # Copy the rest of the application code
 COPY . .
-ENV REACT_APP_DEBUG = true
-ENV REACT_APP_API_URL = http://192.168.100.55:32775
-ENV REACT_APP_TEST = false
 # Build the application
 RUN npm run build 
 
