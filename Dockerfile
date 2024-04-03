@@ -35,11 +35,7 @@ COPY --from=build /opt/app/server /opt/app/server
 # Expose port 8989
 EXPOSE 8989
 
-RUN npm install -g koa koa-router axios crypto-js koa-session koa-static koa-send --verbose
-# Set PATH environment variable to include globally installed Node.js packages
-ENV PATH="/opt/app/node_modules/.bin:${PATH}"
-RUN echo "PATH=$PATH"
-RUN npm list -g --depth=0
-CMD ["sh", "-c", "npm list -g --depth=0 && node -v && node server/server.js"]
+
+CMD ["sh", "-c", "npm install -g koa koa-router axios crypto-js koa-session koa-static koa-send --verbose && npm list -g --depth=0 && node -v && node server/server.js"]
 # Start the server
 # CMD ["node", "server/server.js"]
