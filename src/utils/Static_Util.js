@@ -3,8 +3,7 @@ const myEnvVar = process.env.NODE_ENV;
 let https_url = "http://192.168.31.210:8080";
 // 判断环境变量的值
 if (myEnvVar === "production") {
-  // https_url = "https://api.b18a.xyz";
-  https_url = "http://192.168.100.55:32775"
+  https_url = "https://api.b18a.xyz";
 } else if (myEnvVar === "development") {
   console.log("开发模式");
   https_url = "http://192.168.100.55:32775"
