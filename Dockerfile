@@ -13,7 +13,6 @@ RUN npm install --verbose
 
 # Copy the rest of the application code
 COPY . .
-ENV NODE_ENV production
 # Build the application
 RUN npm run build
 

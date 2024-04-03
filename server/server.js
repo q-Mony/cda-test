@@ -184,7 +184,6 @@ app.use(session(koaSessionConfig, app));
 // 让 Node 为我们创建的 React 应用提供文件
 app.use(serve(path.resolve(__dirname, '../build')));
 // 所有之前未被处理的 GET 请求将返回我们的 React app
-
 router.get('/api', async (ctx) => {
     ctx.body = 'Hello World';
 });

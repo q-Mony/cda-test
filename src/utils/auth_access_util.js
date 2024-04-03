@@ -159,12 +159,12 @@ function requestUserAccessToken(code, complete) {
 }
 
 function getOrigin(apiPort) {
-  // console.log('process.env', process.env)
   let hostname = window.location.hostname;
-  const myEnvVar = process.env.NODE_ENV;
-  console.log("模式"+myEnvVar);
+  const isDebug = process.env.isDebug;
+
+  console.log("模式"+isDebug);
   // 判断环境变量的值
-  if (myEnvVar === "production") {
+  if (!isDebug) {
     return `https://${hostname}`;
   }
   return `http://${hostname}:${apiPort}`;

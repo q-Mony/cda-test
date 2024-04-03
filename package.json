@@ -21,7 +21,7 @@
   "scripts": {
     "start": "npm run start:server & npm run start:web",
     "start:web": "BROWSER=none react-scripts start",
-    "start:server": "node ./server/server.js",
+    "start:server": "node --env-file=.env ./server/server.js ",
     "build": "react-scripts build",
     "config": "node ./cli/cli.js config"
   },
