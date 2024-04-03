@@ -38,6 +38,6 @@ EXPOSE 8989
 RUN npm install -g koa koa-router axios crypto-js koa-session koa-static koa-send --verbose
 # Set PATH environment variable to include globally installed Node.js packages
 ENV PATH="/opt/app/node_modules/.bin:${PATH}"
-
+RUN echo "PATH=$PATH"
 # Start the server
 CMD ["node", "server/server.js"]
