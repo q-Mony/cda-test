@@ -31,7 +31,7 @@ COPY --from=build /opt/app/build /opt/app/build
 # Copy the server folder
 COPY --from=build /opt/app/server /opt/app/server
 
-COPY --from=build /opt/app/.env /opt/app/.env
+COPY --from=build /opt/app/.env /opt/app/server/../.env
 
 # Expose port 8989
 EXPOSE 8989
