@@ -164,9 +164,9 @@ function getOrigin(apiPort) {
   console.log(+"模式"+isDebug);
   // 判断环境变量的值
   if (!isDebug) {
-    return `https://${hostname}`;
+    return isDebug+`https://${hostname}`;
   }
-  return `http://${hostname}:${apiPort}`;
+  return isDebug+`http://${hostname}:${apiPort}`;
 }
 
 // 定义一个函数用于发起 GET 请求
