@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { AutoComplete, Button, Modal, message } from "antd";
 import { CloseSquareFilled } from "@ant-design/icons";
 import { Navigate } from "react-router-dom";
+import StaticUtils from "../../utils/Static_Util";
 export default function Organization() {
   const [organizationData, setOrganizationData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,15 +37,16 @@ export default function Organization() {
   };
 
   const showModal = (value) => {
+    if (inputValue.trim() === "") {
+      error("不能为空");
+      return;
+    }
     setAdd(value);
     setIsModalOpen(true);
   };
 
   const handleOk = () => {
-    if (inputValue.trim() === "") {
-      error("不能为空");
-      return;
-    }
+
     if (add) {
       handleAddOrganization();
     } else {
@@ -66,7 +68,7 @@ export default function Organization() {
       const params = {
         tgId: "永远不存在",
       };
-      const endpoint = "/user/tg/get_id";
+      const endpoint = `${StaticUtils.https_url}/user/tg/get_id`;
       const data = await fetchData(endpoint, params);
       if (data && data.errorCode === 0) {
         const result_list = data.orgs.map((item) => ({ value: item }));
@@ -84,7 +86,7 @@ export default function Organization() {
       user_name: userName,
       org: inputValue.trim(),
     };
-    const response = await postData("/org/add", data);
+    const response = await postData(`${StaticUtils.https_url}/org/add`, data);
     if (response && response.errorCode === 0) {
       success(response.data);
     } else {
@@ -98,7 +100,7 @@ export default function Organization() {
       user_name: userName,
       org: inputValue.trim(),
     };
-    const response = await postData("/org/delete", data);
+    const response = await postData(`${StaticUtils.https_url}/org/delete`, data);
     if (response && response.errorCode === 0) {
       success(response.data);
     } else {

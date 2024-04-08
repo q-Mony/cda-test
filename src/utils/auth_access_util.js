@@ -173,7 +173,7 @@ function getOrigin(apiPort) {
 export async function fetchData(endpoint, params) {
   try {
     const paramString = new URLSearchParams(params).toString();
-    const urlWithParams = `${StaticUtils.https_url}${endpoint}?${paramString}`;
+    const urlWithParams = `${endpoint}?${paramString}`;
     // 发起 GET 请求并等待响应
     const response = await axios.get(urlWithParams);
     // 返回响应数据
@@ -188,9 +188,30 @@ export async function fetchData(endpoint, params) {
 
 export async function postData(endpoint, data) {
   try {
-    const url = `${StaticUtils.https_url}${endpoint}`;
+    const url = `${endpoint}`;
     // 发起 POST 请求并等待响应
     const response = await axios.post(url, data);
+    // 返回响应数据
+    return response.data;
+  } catch (error) {
+    // 捕获错误并打印错误信息
+    console.error("Error:", error);
+    // 返回 null 或其他适当的错误处理
+    return null;
+  }
+}
+
+export async function postParamsData(endpoint, data) {
+  try {
+    // 构建 FormData 对象
+    const formData = new FormData();
+    // 将数据添加到 FormData
+    Object.keys(data).forEach(key => {
+      formData.append(key, data[key]);
+    });
+
+    // 发起 POST 请求并等待响应
+    const response = await axios.post(endpoint, formData);
     // 返回响应数据
     return response.data;
   } catch (error) {

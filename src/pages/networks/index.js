@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { AutoComplete, Button, Modal, message } from "antd";
 import { CloseSquareFilled } from "@ant-design/icons";
+import StaticUtils from "../../utils/Static_Util";
 export default function Networks() {
   const [networkData, setNetworkData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,15 +37,16 @@ export default function Networks() {
   };
 
   const showModal = (value) => {
+    if (inputValue.trim() === "") {
+      error("不能为空");
+      return;
+    }
     setAdd(value);
     setIsModalOpen(true);
   };
 
   const handleOk = () => {
-    if (inputValue.trim() === "") {
-      error("不能为空");
-      return;
-    }
+
     if (add) {
       handleAddNetwork();
     } else {
@@ -66,7 +68,7 @@ export default function Networks() {
       const params = {
         tgId: "永远不存在",
       };
-      const endpoint = "/address/config";
+      const endpoint = `${StaticUtils.https_url}/address/config`;
       const data = await fetchData(endpoint, params);
       if (data && data.errorCode === 0) {
         const result_list = data.networks.map((item) => ({ value: item }));
@@ -84,7 +86,7 @@ export default function Networks() {
       user_name: userName,
       network: inputValue.trim(),
     };
-    const response = await postData("/network/add", data);
+    const response = await postData(`${StaticUtils.https_url}/network/add`, data);
     if (response && response.errorCode === 0) {
       success(response.data);
     } else {
@@ -98,7 +100,7 @@ export default function Networks() {
       user_name: userName,
       network: inputValue.trim(),
     };
-    const response = await postData("/network/delete", data);
+    const response = await postData(`${StaticUtils.https_url}/network/delete`, data);
     if (response && response.errorCode === 0) {
       success(response.data);
     } else {
